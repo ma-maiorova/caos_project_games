@@ -20,6 +20,18 @@ int main() {
     SetConsoleCP(CP_UTF8);
 #endif
 
+    try {
+
+        std::setlocale(LC_ALL, "");
+        auto loc = std::locale("");
+        std::locale::global(loc);
+        std::wcout.imbue(loc);
+        std::wcin.imbue(loc);
+    }
+    catch (const std::exception &e) {
+        std::cerr << "Warning: cannot set locale: " << e.what() << "\n";
+    }
+
     MainLogic play;
     play.Play();
     return 0;

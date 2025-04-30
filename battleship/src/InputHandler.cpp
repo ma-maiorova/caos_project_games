@@ -6,11 +6,9 @@
 #include <windows.h>
 
 void InputHandler::init() {
-    // Инициализация ввода, если требуется
 }
 
 void InputHandler::cleanup() {
-    // Очистка, если требуется
 }
 
 int InputHandler::getInput() {
@@ -21,7 +19,8 @@ int InputHandler::getInput() {
 }
 
 void InputHandler::waitForEnter() {
-    while (_getch() != '\r') {}
+    while (_getch() != '\r') {
+    }
 }
 
 #else
@@ -47,9 +46,10 @@ int InputHandler::GetInput() {
     int nread = read(STDIN_FILENO, buf, 3);
 
     if (nread == 1) {
-        return buf[0];  // Обычный символ (Enter, пробел, буквы и т.д.)
+        return buf[0];  // Обычный символ
+
     } else if (nread == 3 && buf[0] == 27 && buf[1] == '[') {
-        // Обработка стрелок и других ANSI-последовательностей
+        // Стрелки
         switch (buf[2]) {
             case 'A':
                 return 'U';  // Up

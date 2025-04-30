@@ -5,20 +5,50 @@
 #include <conio.h>
 #include <windows.h>
 
-void InputHandler::init() {
+#include <iostream>
+
+void InputHandler::Init() {
+    // std::ios_base::sync_with_stdio(false);
+    // std::cin.tie(nullptr);
+    // setvbuf(stdout, nullptr, _IONBF, 0);
+
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cursor_info;
+    GetConsoleCursorInfo(hConsole, &cursor_info);
+    cursor_info.bVisible = false;
+    SetConsoleCursorInfo(hConsole, &cursor_info);
+
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
 }
 
-void InputHandler::cleanup() {
+void InputHandler::Cleanup() {
 }
 
-int InputHandler::getInput() {
+int InputHandler::GetInput() {
     if (_kbhit()) {
-        return _getch();
+        int ch = _getch();
+        if (ch == 224) {
+            ch = _getch();
+            switch (ch) {
+                case 72:
+                    return 'U';
+                case 80:
+                    return 'D';
+                case 75:
+                    return 'L';
+                case 77:
+                    return 'R';
+                default:
+                    return ch;
+            }
+        }
+        return ch;
     }
     return 0;
 }
 
-void InputHandler::waitForEnter() {
+void InputHandler::WaitForEnter() {
     while (_getch() != '\r') {
     }
 }

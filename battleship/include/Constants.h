@@ -40,11 +40,12 @@ const int kArrowLeft = 76;
 
 const int kEscape = 27;
 const int kSpace = 32;
-const int kDelete = 127;
 
 #ifdef _WIN32
-const int kEnter = '\r';
+const int kDelete = 8;
+const int kEnter = 13;
 #else
+const int kDelete = 127;
 const int kEnter = 10;
 #endif
 

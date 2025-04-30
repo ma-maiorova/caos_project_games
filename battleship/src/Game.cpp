@@ -2,6 +2,7 @@
 #include "InputHandler.h"
 #include "Render.h"
 
+#include <algorithm>
 #include <unistd.h>
 
 Game::Game()

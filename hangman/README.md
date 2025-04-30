@@ -2,9 +2,7 @@
 
 ## Демонстрация работы
 
-
-https://github.com/user-attachments/assets/c5c7ea35-5b9a-43a0-9b40-f92418d58137
-
+https://github.com/user-attachments/assets/c3507766-7620-4ad7-8614-acd992fea675
 
 
 ## Правила игры

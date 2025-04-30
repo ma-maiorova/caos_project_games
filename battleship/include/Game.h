@@ -1,28 +1,27 @@
 #pragma once
 
-#include <iostream>
-#include "Player.h"
 #include "Menu.h"
-#include "Constants.h"
+#include "Player.h"
 
 class Game {
 public:
-    Game() {
-        std::cout << "I'm in Game()\n";
-    };
+    Game();
     void Run();
 
 private:
-    // Player player1;
-    // Player player2;
-    // Player* currentPlayer;
-    // Player* otherPlayer;
-    // Constants::GameState state_;
-    // Menu main_menu_;
+    Player player1_;
+    Player player2_;
+    
+    Player* current_player_;
+    Player* other_player_;
+
+    constants::GameState state_;
+    Menu main_menu_;
 
     void ProcessMainMenu();
     void ProcessShipPlacement();
     void ProcessBattle();
+    void ProcessSwitching();
     void SwitchPlayer();
     void ResetGame();
 };

@@ -7,12 +7,12 @@ class Menu {
 public:
     Menu(const std::vector<std::string> &items);
 
-    void moveUp();
-    void moveDown();
-    int getSelectedIndex() const;
-    const std::vector<std::string> &getItems() const;
+    void MoveUp();
+    void MoveDown();
+    int GetSelectedIndex() const;
+    const std::vector<std::string> &GetItems() const;
 
 private:
-    std::vector<std::string> items;
-    int selectedIndex;
+    std::vector<std::string> items_;
+    int selected_index_;
 };

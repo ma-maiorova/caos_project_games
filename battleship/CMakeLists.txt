@@ -8,4 +8,10 @@ include_directories(src)
 
 add_executable(battleship_main 
                 src/main.cpp
-                src/Game.cpp)
+                src/Game.cpp
+                src/Render.cpp
+                src/Menu.cpp
+                src/InputHandler.cpp
+                src/Player.cpp
+                src/Board.cpp
+                src/Ship.cpp)

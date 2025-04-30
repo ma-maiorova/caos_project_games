@@ -3,31 +3,52 @@
 #include <string>
 #include <vector>
 
-namespace Constants {
+namespace constants {
 
-const int BOARD_SIZE = 10;
-const int MENU_ITEMS_COUNT = 2;
+const int kBoardSize = 10;
+const int kMenuItemsCount = 2;
 
-const std::vector<int> SHIP_LENGTHS = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
-const std::vector<int> SHIP_COUNTS = {1, 2, 3, 4};
+const std::vector<int> kShipLengths = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
+const std::vector<int> kShipCounts = {4, 3, 2, 1};
+
+// Для быстрой отладки
+// const std::vector<int> kShipCounts = {0, 1, 0, 0};
 
 // Коды цветов для консоли
-const std::string COLOR_RESET = "\033[0m";
-const std::string COLOR_RED = "\033[31m";
-const std::string COLOR_GREEN = "\033[32m";
-const std::string COLOR_BLUE = "\033[34m";
-const std::string COLOR_YELLOW = "\033[33m";
-const std::string COLOR_CYAN = "\033[36m";
+const std::string kColorReset = "\033[0m";
+const std::string kColorRed = "\033[31m";
+const std::string kColorGreen = "\033[32m";
+const std::string kColorYellow = "\033[33m";
+const std::string kColorBlue = "\033[34m";
+const std::string kColorMagenta = "\033[35m";
+const std::string kColorCyan = "\033[36m";
 
 // Символы для отображения
-const char EMPTY_CELL = '~';
-const char SHIP_CELL = 'O';
-const char HIT_CELL = 'X';
-const char MISS_CELL = '*';
-const char SELECTOR = '>';
-const char CURSOR = '#';
+const char kEmptyCell = '~';
+const char kShipCell = 'O';
+const char kHitCell = 'x';
+const char kSunkShipCell = 'X';
+const char kMissCell = '*';
+const char kSelector = '>';
+const char kCursor = '#';
+
+// Номера клавиш
+const int kArrowUp = 85;
+const int kArrowDown = 68;
+const int kArrowRight = 82;
+const int kArrowLeft = 76;
+
+const int kEscape = 27;
+const int kSpace = 32;
+const int kDelete = 127;
+
+#ifdef _WIN32
+const int kEnter = '\r';
+#else
+const int kEnter = 10;
+#endif
 
 // Состояния игры
-enum GameState { MAIN_MENU, SHIP_PLACEMENT, BATTLE, GAME_OVER, EXIT };
+enum GameState { MAIN_MENU, SHIP_PLACEMENT, BATTLE, SWITCHING, GAME_OVER, EXIT };
 
 } // namespace Constants

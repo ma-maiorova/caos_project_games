@@ -5,6 +5,8 @@
 
 #include <memory>
 
+namespace battleship {
+
 class Board {
 public:
     Board();
@@ -49,3 +51,4 @@ private:
 
     bool IsAdjacentCellEmpty(int x, int y) const;
 };
+}  // namespace battleship

@@ -3,6 +3,8 @@
 #include "Menu.h"
 #include "Player.h"
 
+namespace battleship {
+
 class Game {
 public:
     Game();
@@ -11,7 +13,7 @@ public:
 private:
     Player player1_;
     Player player2_;
-    
+
     Player* current_player_;
     Player* other_player_;
 
@@ -25,3 +27,5 @@ private:
     void SwitchPlayer();
     void ResetGame();
 };
+
+}  // namespace battleship

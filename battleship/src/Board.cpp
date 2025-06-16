@@ -3,12 +3,12 @@
 #include <algorithm>
 #include <iostream>
 
-Board::Board()
+battleship::Board::Board()
     : grid_(constants::kBoardSize, std::vector<char>(constants::kBoardSize, constants::kEmptyCell)),
       temp_ship_cells_(constants::kBoardSize, std::vector<bool>(constants::kBoardSize, false)) {
 }
 
-bool Board::PlaceShip(const std::vector<std::pair<int, int>>& cells) {
+bool battleship::Board::PlaceShip(const std::vector<std::pair<int, int>>& cells) {
     if (!CanPlaceShip(cells)) {
         return false;
     }
@@ -22,7 +22,7 @@ bool Board::PlaceShip(const std::vector<std::pair<int, int>>& cells) {
     return true;
 }
 
-bool Board::CanPlaceShip(const std::vector<std::pair<int, int>>& cells) const {
+bool battleship::Board::CanPlaceShip(const std::vector<std::pair<int, int>>& cells) const {
     for (const auto& cell : cells) {
         if (cell.first < 0 || cell.first >= constants::kBoardSize || cell.second < 0 ||
             cell.second >= constants::kBoardSize) {
@@ -40,20 +40,20 @@ bool Board::CanPlaceShip(const std::vector<std::pair<int, int>>& cells) const {
     return true;
 }
 
-void Board::SetTempShipCell(int x, int y) {
+void battleship::Board::SetTempShipCell(int x, int y) {
     if (x >= 0 && x < constants::kBoardSize && y >= 0 && y < constants::kBoardSize) {
         temp_ship_cells_[x][y] = true;
     }
 }
 
-bool Board::IsTempShipCell(int x, int y) const {
+bool battleship::Board::IsTempShipCell(int x, int y) const {
     if (x >= 0 && x < constants::kBoardSize && y >= 0 && y < constants::kBoardSize) {
         return temp_ship_cells_[x][y];
     }
     return false;
 }
 
-bool Board::IsAdjacentCellEmpty(int x, int y) const {
+bool battleship::Board::IsAdjacentCellEmpty(int x, int y) const {
     for (int dx = -1; dx <= 1; ++dx) {
         for (int dy = -1; dy <= 1; ++dy) {
             int nx = x + dx;
@@ -68,7 +68,7 @@ bool Board::IsAdjacentCellEmpty(int x, int y) const {
     return true;
 }
 
-bool Board::RemoveShip(int x, int y) {
+bool battleship::Board::RemoveShip(int x, int y) {
     for (auto it = ships_.begin(); it != ships_.end(); ++it) {
         if ((*it)->Contains(x, y)) {
             for (const auto& cell : (*it)->GetCells()) {
@@ -81,7 +81,7 @@ bool Board::RemoveShip(int x, int y) {
     return false;
 }
 
-bool Board::Attack(int x, int y, std::string& attack_status) {
+bool battleship::Board::Attack(int x, int y, std::string& attack_status) {
     if (x < 0 || x >= constants::kBoardSize || y < 0 || y >= constants::kBoardSize) {
         attack_status = "Вы вышли за пределы поля";
         return false;
@@ -115,34 +115,34 @@ bool Board::Attack(int x, int y, std::string& attack_status) {
     return false;
 }
 
-bool Board::IsCellEmpty(int x, int y) const {
+bool battleship::Board::IsCellEmpty(int x, int y) const {
     return grid_[x][y] == constants::kEmptyCell;
 }
 
-bool Board::IsCellHit(int x, int y) const {
+bool battleship::Board::IsCellHit(int x, int y) const {
     return grid_[x][y] == constants::kHitCell;
 }
 
-bool Board::IsCellMiss(int x, int y) const {
+bool battleship::Board::IsCellMiss(int x, int y) const {
     return grid_[x][y] == constants::kMissCell;
 }
 
-bool Board::IsCellShip(int x, int y) const {
+bool battleship::Board::IsCellShip(int x, int y) const {
     return grid_[x][y] == constants::kShipCell;
 }
 
-bool Board::IsCellSunk(int x, int y) const {
+bool battleship::Board::IsCellSunk(int x, int y) const {
     if (x < 0 || x >= constants::kBoardSize || y < 0 || y >= constants::kBoardSize) {
         return false;
     }
     return grid_[x][y] == constants::kSunkShipCell;
 }
 
-const std::vector<std::shared_ptr<Ship>>& Board::GetShips() const {
+const std::vector<std::shared_ptr<battleship::Ship>>& battleship::Board::GetShips() const {
     return ships_;
 }
 
-bool Board::AllShipsSunk() const {
+bool battleship::Board::AllShipsSunk() const {
     for (const auto& ship : ships_) {
         if (!ship->IsSunk()) {
             return false;
@@ -151,7 +151,7 @@ bool Board::AllShipsSunk() const {
     return true;
 }
 
-void Board::Clear() {
+void battleship::Board::Clear() {
     grid_ = std::vector<std::vector<char>>(
         constants::kBoardSize, std::vector<char>(constants::kBoardSize, constants::kEmptyCell));
     ships_.clear();

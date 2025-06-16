@@ -1,20 +1,20 @@
 #include "Player.h"
 
-Player::Player(const std::string& name) : name_(name){};
+battleship::Player::Player(const std::string& name) : name_(name){};
 
-const std::string& Player::GetName() const {
+const std::string& battleship::Player::GetName() const {
     return name_;
 }
 
-Board& Player::GetOwnBoard() {
+battleship::Board& battleship::Player::GetOwnBoard() {
     return *own_board_;
 }
 
-Board& Player::GetEnemyBoard() {
+battleship::Board& battleship::Player::GetEnemyBoard() {
     return *enemy_board_;
 }
 
-void Player::Reset() {
+void battleship::Player::Reset() {
     own_board_->Clear();
     enemy_board_->Clear();
 }

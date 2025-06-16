@@ -5,7 +5,7 @@
 #include <algorithm>
 #include <unistd.h>
 
-Game::Game()
+battleship::Game::Game()
     : state_(constants::MAIN_MENU),
       main_menu_({"Начать игру", "Правила"}),
       player1_("Игрок 1"),
@@ -25,7 +25,7 @@ Game::Game()
     InputHandler::Init();
 }
 
-void Game::Run() {
+void battleship::Game::Run() {
     while (state_ != constants::EXIT) {
         switch (state_) {
             case constants::MAIN_MENU:
@@ -50,11 +50,11 @@ void Game::Run() {
     InputHandler::Cleanup();
 }
 
-void Game::SwitchPlayer() {
+void battleship::Game::SwitchPlayer() {
     std::swap(current_player_, other_player_);
 }
 
-void Game::ProcessMainMenu() {
+void battleship::Game::ProcessMainMenu() {
     Render::RenderMainMenu(main_menu_);
 
     int input;
@@ -92,7 +92,7 @@ void Game::ProcessMainMenu() {
     }
 }
 
-void Game::ProcessShipPlacement() {
+void battleship::Game::ProcessShipPlacement() {
     std::vector<int> remaining_ships = constants::kShipCounts;
     std::vector<std::pair<int, int>> current_ship_cells;
     int cursor_x = 0, cursor_y = 0;
@@ -205,7 +205,7 @@ void Game::ProcessShipPlacement() {
     }
 }
 
-void Game::ProcessBattle() {
+void battleship::Game::ProcessBattle() {
     int cursor_x = 0, cursor_y = 0;
     bool hit = true;
     int input;
@@ -266,13 +266,13 @@ void Game::ProcessBattle() {
     }
 }
 
-void Game::ProcessSwitching() {
+void battleship::Game::ProcessSwitching() {
     Render::RenderSwitching(*current_player_);
     InputHandler::WaitForEnter();
     state_ = constants::BATTLE;
 }
 
-void Game::ResetGame() {
+void battleship::Game::ResetGame() {
     Render::RenderGameOver(*current_player_, other_player_->GetName());
 
     player1_.Reset();

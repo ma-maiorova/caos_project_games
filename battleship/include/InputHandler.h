@@ -2,6 +2,8 @@
 
 #include "Constants.h"
 
+namespace battleship {
+
 class InputHandler {
 public:
     static void Init();
@@ -9,3 +11,4 @@ public:
     static int GetInput();
     static void WaitForEnter();
 };
+}  // namespace battleship

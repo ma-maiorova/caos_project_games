@@ -1,13 +1,13 @@
 #include "Ship.h"
 
-Ship::Ship(int size) : size_(size), hits_(size, false) {
+battleship::Ship::Ship(int size) : size_(size), hits_(size, false) {
 }
 
-int Ship::GetSize() const {
+int battleship::Ship::GetSize() const {
     return size_;
 }
 
-bool Ship::IsSunk() const {
+bool battleship::Ship::IsSunk() const {
     for (bool hit : hits_) {
         if (!hit) {
             return false;
@@ -16,7 +16,7 @@ bool Ship::IsSunk() const {
     return true;
 }
 
-void Ship::Hit() {
+void battleship::Ship::Hit() {
     for (int& hit : hits_) {
         if (!hit) {
             hit = true;
@@ -25,7 +25,7 @@ void Ship::Hit() {
     }
 }
 
-bool Ship::Contains(int x, int y) const {
+bool battleship::Ship::Contains(int x, int y) const {
     for (const auto& cell : cells_) {
         if (cell.first == x && cell.second == y) {
             return true;
@@ -34,10 +34,10 @@ bool Ship::Contains(int x, int y) const {
     return false;
 }
 
-void Ship::AddCell(int x, int y) {
+void battleship::Ship::AddCell(int x, int y) {
     cells_.emplace_back(x, y);
 }
 
-const std::vector<std::pair<int, int>>& Ship::GetCells() const {
+const std::vector<std::pair<int, int>>& battleship::Ship::GetCells() const {
     return cells_;
 }

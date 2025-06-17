@@ -4,15 +4,15 @@
 #include <stdlib.h>
 #include <cstdlib>
 
-void Render::ClearScreen() {
-    #ifdef _WIN32
-        system("cls");
-    #else
-        system("clear");
-    #endif
+void battleship::Render::ClearScreen() {
+#ifdef _WIN32
+    system("cls");
+#else
+    system("clear");
+#endif
 }
 
-void Render::RenderMainMenu(const Menu& menu) {
+void battleship::Render::RenderMainMenu(const Menu& menu) {
     ClearScreen();
 
     PrintColoredString(constants::kColorBlue, "=== МОРСКОЙ БОЙ ===");
@@ -30,21 +30,23 @@ void Render::RenderMainMenu(const Menu& menu) {
     std::cout << "\nИспользуйте стрелки для выбора, Enter для подтверждения\n";
 }
 
-void Render::RenderRules() {
+void battleship::Render::RenderRules() {
     ClearScreen();
 
     PrintColoredString(constants::kColorCyan, "=== ПРАВИЛА ИГРЫ ===");
     std::cout << "1. Каждый игрок расставляет свои корабли на поле 10x10\n";
-    std::cout << "2. Корабли не могут соприкасаться друг с другом (должен быть зазор хотя бы в одну ячейку)\n";
+    std::cout << "2. Корабли не могут соприкасаться друг с другом (должен быть зазор хотя бы в "
+                 "одну ячейку)\n";
     std::cout << "3. В свой ход игрок делает выстрел по полю противника\n";
     std::cout << "4. Если выстрел попадает в корабль, игрок продолжает ход\n";
     std::cout << "5. Игра продолжается, пока все корабли одного из игроков не будут уничтожены\n\n";
     std::cout << "Нажмите Enter для возврата в меню...\n";
 }
 
-void Render::RenderShipPlacement(Player& player, const std::vector<int>& remaining_ships,
-                                 int cursor_x, int cursor_y, bool is_placing,
-                                 const Board& temp_board) {
+void battleship::Render::RenderShipPlacement(battleship::Player& player,
+                                             const std::vector<int>& remaining_ships, int cursor_x,
+                                             int cursor_y, bool is_placing,
+                                             const battleship::Board& temp_board) {
     ClearScreen();
 
     std::cout << "Расстановка кораблей (" << player.GetName() << ")\n\n";
@@ -67,7 +69,8 @@ void Render::RenderShipPlacement(Player& player, const std::vector<int>& remaini
     std::cout << "Q - скрыть / показать поле\n";
 }
 
-void Render::RenderBattle(Player& current_player, int cursor_x, int cursor_y, const std::string& attack_status) {
+void battleship::Render::RenderBattle(battleship::Player& current_player, int cursor_x,
+                                      int cursor_y, const std::string& attack_status) {
     ClearScreen();
 
     std::cout << "Ход игрока: " << current_player.GetName() << "\n\n";
@@ -76,7 +79,7 @@ void Render::RenderBattle(Player& current_player, int cursor_x, int cursor_y, co
     PrintBoard(current_player.GetOwnBoard());
 
     std::cout << "\nПоле противника:\n";
-    PrintBoard(current_player.GetEnemyBoard(), false, true,  cursor_x, cursor_y);
+    PrintBoard(current_player.GetEnemyBoard(), false, true, cursor_x, cursor_y);
 
     std::cout << "\n" << attack_status << '\n';
 
@@ -100,7 +103,7 @@ void Render::RenderBattle(Player& current_player, int cursor_x, int cursor_y, co
     std::cout << "Q - скрыть/показать поле\n";
 }
 
-void Render::RenderSwitching(const Player& next_player) {
+void battleship::Render::RenderSwitching(const battleship::Player& next_player) {
     ClearScreen();
     PrintColoredString(constants::kColorCyan, "=== СМЕНА ИГРОКА ===");
     std::cout << "Следующий ход: " << next_player.GetName() << "\n\n";
@@ -108,7 +111,8 @@ void Render::RenderSwitching(const Player& next_player) {
     std::cout << "Нажмите Enter, чтобы продолжить\n";
 }
 
-void Render::RenderGameOver(Player& winner, const std::string& looser_name) {
+void battleship::Render::RenderGameOver(battleship::Player& winner,
+                                        const std::string& looser_name) {
     ClearScreen();
 
     PrintColoredString(constants::kColorCyan, "=== ИГРА ОКОНЧЕНА ===");
@@ -125,11 +129,13 @@ void Render::RenderGameOver(Player& winner, const std::string& looser_name) {
     std::cout << "Нажмите Enter для возврата в меню...\n";
 }
 
-void Render::PrintBoard(const Board& board, bool own_board,  bool show_cursor, int cursor_x, int cursor_y, const Board& temp_board) {
+void battleship::Render::PrintBoard(const battleship::Board& board, bool own_board,
+                                    bool show_cursor, int cursor_x, int cursor_y,
+                                    const battleship::Board& temp_board) {
     PrintHeaderBoardLine();
     for (int i = 0; i < constants::kBoardSize; ++i) {
         std::cout << i << " ";
-        
+
         for (int j = 0; j < constants::kBoardSize; ++j) {
 
             if (board.IsHidden()) {

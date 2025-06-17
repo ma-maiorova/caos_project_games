@@ -7,7 +7,7 @@
 
 #include <iostream>
 
-void InputHandler::Init() {
+void battleship::InputHandler::Init() {
     // std::ios_base::sync_with_stdio(false);
     // std::cin.tie(nullptr);
     // setvbuf(stdout, nullptr, _IONBF, 0);
@@ -22,10 +22,10 @@ void InputHandler::Init() {
     SetConsoleCP(CP_UTF8);
 }
 
-void InputHandler::Cleanup() {
+void battleship::InputHandler::Cleanup() {
 }
 
-int InputHandler::GetInput() {
+int battleship::InputHandler::GetInput() {
     if (_kbhit()) {
         int ch = _getch();
         if (ch == 224) {
@@ -48,7 +48,7 @@ int InputHandler::GetInput() {
     return 0;
 }
 
-void InputHandler::WaitForEnter() {
+void battleship::InputHandler::WaitForEnter() {
     while (_getch() != '\r') {
     }
 }
@@ -60,18 +60,18 @@ void InputHandler::WaitForEnter() {
 
 static struct termios old_settings, new_settings;
 
-void InputHandler::Init() {
+void battleship::InputHandler::Init() {
     tcgetattr(STDIN_FILENO, &old_settings);  // Сохраняем текущие настройки
     new_settings = old_settings;
     new_settings.c_lflag &= ~(ICANON | ECHO);  // Отключаем канонический режим и эхо
     tcsetattr(STDIN_FILENO, TCSANOW, &new_settings);  // Применяем новые настройки
 }
 
-void InputHandler::Cleanup() {
+void battleship::InputHandler::Cleanup() {
     tcsetattr(STDIN_FILENO, TCSANOW, &old_settings);  // Восстанавливаем настройки
 }
 
-int InputHandler::GetInput() {
+int battleship::InputHandler::GetInput() {
     char buf[3] = {0};
     int nread = read(STDIN_FILENO, buf, 3);
 
@@ -96,7 +96,7 @@ int InputHandler::GetInput() {
     return 0;
 }
 
-void InputHandler::WaitForEnter() {
+void battleship::InputHandler::WaitForEnter() {
     while (GetInput() != '\n') {
     }
 }

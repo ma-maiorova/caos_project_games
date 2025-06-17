@@ -1,5 +1,7 @@
 #include "Constants.h"
 
+namespace battleship {
+
 class Ship {
 public:
     Ship(int size);
@@ -16,3 +18,4 @@ private:
     std::vector<std::pair<int, int>> cells_;
     std::vector<int> hits_;
 };
+}  // namespace battleship

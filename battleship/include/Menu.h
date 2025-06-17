@@ -3,6 +3,8 @@
 #include <string>
 #include <vector>
 
+namespace battleship {
+
 class Menu {
 public:
     Menu(const std::vector<std::string> &items);
@@ -16,3 +18,4 @@ private:
     std::vector<std::string> items_;
     int selected_index_;
 };
+}  // namespace battleship
